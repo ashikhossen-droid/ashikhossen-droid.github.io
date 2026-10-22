@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MD. ASHIK | AI Automation Engineer</title>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        darkBg: '#090a0f',
+                        cardBg: '#13151f',
+                        neonBlue: '#00e5ff',
+                        neonPurple: '#b400fb',
+                    },
+                    animation: {
+                        'gradient-x': 'gradient-x 3s ease infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        'gradient-x': {
+                            '0%, 100%': {
+                                'background-size': '200% 200%',
+                                'background-position': 'left center'
+                            },
+                            '50%': {
+                                'background-size': '200% 200%',
+                                'background-position': 'right center'
+                            },
+                        },
+                        'float': {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #090a0f;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00e5ff;
+        }
+
+        /* Scroll Reveal Utility Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Neon Glow Effects */
+        .neon-text-blue {
+            text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+        }
+        .neon-border-blue:hover {
+            box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
+            border-color: #00e5ff;
+        }
+        
+        /* Background Grid Pattern */
+        .bg-grid {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+        }
+    </style>
+</head>
+<body class="bg-darkBg text-gray-300 font-sans antialiased relative overflow-x-hidden selection:bg-neonBlue selection:text-darkBg">
+
+    <!-- Ambient Background Lights -->
+    <div class="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+        <div class="absolute top-[-10%] left-[-10%] w-96 h-96 bg-neonBlue opacity-10 rounded-full blur-[100px]"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-96 h-96 bg-neonPurple opacity-10 rounded-full blur-[100px]"></div>
+        <div class="absolute inset-0 bg-grid pointer-events-none z-[-5]"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 top-0 bg-darkBg/80 backdrop-blur-md border-b border-gray-800 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center gap-2">
+                    <div class="w-8 h-8 rounded bg-gradient-to-br from-neonBlue to-neonPurple flex items-center justify-center text-white font-bold text-xl">A</div>
+                    <a href="#" class="text-xl font-bold text-white tracking-wider">ASHIK<span class="text-neonBlue">.AI</span></a>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="text-gray-300 hover:text-neonBlue transition-colors px-3 py-2 text-sm font-medium">Home</a>
+                    <a href="#about" class="text-gray-300 hover:text-neonBlue transition-colors px-3 py-2 text-sm font-medium">About</a>
+                    <a href="#skills" class="text-gray-300 hover:text-neonBlue transition-colors px-3 py-2 text-sm font-medium">Skills</a>
+                    <a href="#experience" class="text-gray-300 hover:text-neonBlue transition-colors px-3 py-2 text-sm font-medium">Experience</a>
+                    <a href="#projects" class="text-gray-300 hover:text-neonBlue transition-colors px-3 py-2 text-sm font-medium">Projects</a>
+                    <a href="#contact" class="px-4 py-2 text-sm font-medium text-neonBlue border border-neonBlue rounded-full hover:bg-neonBlue hover:text-darkBg transition-all shadow-[0_0_10px_rgba(0,229,255,0.2)] hover:shadow-[0_0_20px_rgba(0,229,255,0.6)]">Contact Me</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-white focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-cardBg border-b border-gray-800 absolute w-full">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-neonBlue hover:bg-gray-800 rounded-md">Home</a>
+                <a href="#about" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-neonBlue hover:bg-gray-800 rounded-md">About</a>
+                <a href="#skills" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-neonBlue hover:bg-gray-800 rounded-md">Skills</a>
+                <a href="#experience" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-neonBlue hover:bg-gray-800 rounded-md">Experience</a>
+                <a href="#projects" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-neonBlue hover:bg-gray-800 rounded-md">Projects</a>
+                <a href="#contact" class="block px-3 py-2 text-base font-medium text-neonBlue border border-neonBlue rounded-md text-center mt-4">Contact Me</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center pt-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center reveal">
+            <p class="text-neonBlue font-medium tracking-widest mb-4 uppercase text-sm">Hello, I am</p>
+            <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-6 tracking-tight">
+                MD. <span class="bg-clip-text text-transparent bg-gradient-to-r from-neonBlue to-neonPurple animate-gradient-x neon-text-blue">ASHIK</span>
+            </h1>
+            <h2 class="text-xl md:text-2xl text-gray-400 font-light mb-8 max-w-3xl mx-auto">
+                AI Automation Engineer <span class="text-neonPurple">|</span> AI Integration Engineer <span class="text-neonBlue">|</span> Workflow Automation Engineer
+            </h2>
+            <p class="text-gray-500 mb-10 max-w-2xl mx-auto text-lg">
+                Building scalable automation solutions, intelligent agents, and API-driven workflows to supercharge business efficiency and accuracy.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#contact" class="px-8 py-4 bg-transparent border border-neonBlue text-neonBlue font-semibold rounded hover:bg-neonBlue hover:text-darkBg transition-all shadow-[0_0_15px_rgba(0,229,255,0.3)] hover:shadow-[0_0_30px_rgba(0,229,255,0.6)]">
+                    Let's Automate <i class="fas fa-robot ml-2"></i>
+                </a>
+                <a href="#projects" class="px-8 py-4 bg-cardBg border border-gray-700 text-white font-semibold rounded hover:border-gray-500 transition-all">
+                    View My Work <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 bg-cardBg/50 relative border-y border-gray-800/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="reveal">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-6 flex items-center">
+                        <span class="text-neonBlue mr-3">01.</span> About Me
+                    </h2>
+                    <div class="w-20 h-1 bg-gradient-to-r from-neonBlue to-transparent mb-8"></div>
+                    <p class="text-lg text-gray-300 leading-relaxed mb-6">
+                        I am an innovative <strong class="text-white">AI Automation professional</strong> with hands-on experience designing and deploying complex workflow automations, intelligent AI agents, RAG chatbots, and seamless API-driven integrations. 
+                    </p>
+                    <p class="text-lg text-gray-400 leading-relaxed mb-6">
+                        By leveraging tools like <span class="text-neonPurple font-semibold">n8n, Zapier, Make</span>, and modern <span class="text-neonBlue font-semibold">LLMs</span>, I transform manual bottlenecks into scalable, efficient systems. Combining analytical problem-solving with a strong ownership mindset, I focus on delivering tangible business value through next-generation automation frameworks.
+                    </p>
+                    <div class="flex gap-4 mt-8">
+                        <a href="https://github.com" target="_blank" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-neonBlue transition-all"><i class="fab fa-github"></i></a>
+                        <a href="https://linkedin.com" target="_blank" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-neonBlue transition-all"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://twitter.com" target="_blank" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-neonBlue transition-all"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="relative reveal delay-200 lg:ml-auto">
+                    <!-- Abstract Tech Art Placeholder -->
+                    <div class="relative w-full max-w-md aspect-square rounded-2xl border border-gray-700 bg-darkBg overflow-hidden group flex items-center justify-center">
+                        <div class="absolute inset-0 bg-gradient-to-br from-neonBlue/10 to-neonPurple/10 group-hover:opacity-50 transition-opacity"></div>
+                        <i class="fas fa-network-wired text-9xl text-gray-700 group-hover:text-neonBlue transition-colors duration-500 animate-float"></i>
+                        <!-- Decorative elements -->
+                        <div class="absolute top-4 left-4 w-2 h-2 bg-neonBlue rounded-full animate-ping"></div>
+                        <div class="absolute bottom-8 right-8 w-3 h-3 bg-neonPurple rounded-full animate-pulse"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+                    <span class="text-neonBlue">02.</span> Core Arsenal
+                </h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-transparent via-neonPurple to-transparent mx-auto"></div>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6 reveal">
+                <!-- Skill Badges -->
+                <script>
+                    const skills = [
+                        { name: 'n8n', icon: 'fas fa-project-diagram' },
+                        { name: 'Zapier', icon: 'fas fa-bolt' },
+                        { name: 'Make', icon: 'fas fa-cogs' },
+                        { name: 'REST APIs', icon: 'fas fa-exchange-alt' },
+                        { name: 'Webhooks', icon: 'fas fa-link' },
+                        { name: 'JSON', icon: 'fas fa-code' },
+                        { name: 'OpenAI', icon: 'fas fa-brain' },
+                        { name: 'Gemini', icon: 'fas fa-sparkles' },
+                        { name: 'Claude', icon: 'fas fa-robot' },
+                        { name: 'LangChain', icon: 'fas fa-link' },
+                        { name: 'RAG', icon: 'fas fa-database' },
+                        { name: 'Prompt Eng.', icon: 'fas fa-terminal' },
+                        { name: 'WordPress', icon: 'fab fa-wordpress' },
+                    ];
+
+                    skills.forEach((skill, index) => {
+                        let delay = (index % 5) * 100;
+                        document.write(`
+                            <div class="bg-cardBg border border-gray-800 rounded-xl p-4 flex flex-col items-center justify-center gap-3 transition-all duration-300 neon-border-blue hover:-translate-y-1 group" style="transition-delay: ${delay}ms;">
+                                <i class="${skill.icon} text-2xl text-gray-500 group-hover:text-neonBlue transition-colors"></i>
+                                <span class="text-sm font-medium text-gray-300 group-hover:text-white">${skill.name}</span>
+                            </div>
+                        `);
+                    });
+                </script>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-24 bg-cardBg/50 relative border-y border-gray-800/50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+                    <span class="text-neonBlue">03.</span> Professional Journey
+                </h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-transparent via-neonBlue to-transparent mx-auto"></div>
+            </div>
+
+            <div class="relative border-l-2 border-gray-800 ml-3 md:ml-6">
+                
+                <!-- Timeline Item 1 -->
+                <div class="mb-12 ml-8 reveal relative">
+                    <span class="absolute -left-[41px] top-1 h-5 w-5 rounded-full border-4 border-darkBg bg-neonBlue shadow-[0_0_10px_#00e5ff]"></span>
+                    <div class="bg-darkBg border border-gray-800 p-6 rounded-xl hover:border-gray-600 transition-colors">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                            <h3 class="text-xl font-bold text-white">Freelance AI Automation & Integration Specialist</h3>
+                            <span class="text-neonBlue text-sm font-medium bg-neonBlue/10 px-3 py-1 rounded-full w-max mt-2 md:mt-0">Remote</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-4"><i class="far fa-calendar-alt mr-2"></i> Present</p>
+                        <ul class="space-y-2 text-gray-400 list-disc list-outside ml-4">
+                            <li>Designed and deployed AI-powered workflow automations to streamline complex business operations.</li>
+                            <li>Built custom AI agents, RAG chatbots, and automated lead generation systems tailored to client needs.</li>
+                            <li>Seamlessly integrated AI tools with CRMs, Google Workspace, and websites via REST APIs and Webhooks.</li>
+                            <li>Developed logical workflows that reduced manual effort, improved speed, and enhanced data accuracy.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 2 -->
+                <div class="ml-8 reveal relative">
+                    <span class="absolute -left-[41px] top-1 h-5 w-5 rounded-full border-4 border-darkBg bg-neonPurple shadow-[0_0_10px_#b400fb]"></span>
+                    <div class="bg-darkBg border border-gray-800 p-6 rounded-xl hover:border-gray-600 transition-colors">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                            <h3 class="text-xl font-bold text-white">Teacher & Accountant</h3>
+                            <span class="text-neonPurple text-sm font-medium bg-neonPurple/10 px-3 py-1 rounded-full w-max mt-2 md:mt-0">Pabna, Bangladesh</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-4"><i class="far fa-calendar-alt mr-2"></i> 2+ Years Experience</p>
+                        <ul class="space-y-2 text-gray-400 list-disc list-outside ml-4">
+                            <li>Managed institutional accounting, budgeting, payroll processing, and financial reporting.</li>
+                            <li>Maintained administrative records, ensuring regulatory compliance and operational efficiency.</li>
+                            <li>Instructed students and supported academic planning, mentoring, and institutional coordination.</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+                    <span class="text-neonBlue">04.</span> Featured Projects
+                </h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-transparent via-neonPurple to-transparent mx-auto"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <!-- Project 1 -->
+                <div class="group relative rounded-2xl overflow-hidden bg-cardBg border border-gray-800 hover:border-neonBlue transition-all duration-500 reveal hover:-translate-y-2 hover:shadow-[0_10px_30px_rgba(0,229,255,0.15)]">
+                    <div class="h-48 bg-gray-900 relative overflow-hidden">
+                        <img src="https://placehold.co/600x400/090a0f/00e5ff?text=RAG+Chatbot" alt="Project 1" class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-500 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-cardBg to-transparent"></div>
+                    </div>
+                    <div class="p-6 relative z-10">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-xl font-bold text-white group-hover:text-neonBlue transition-colors">AI Customer Support RAG Chatbot</h3>
+                            <a href="#" class="text-gray-400 hover:text-white"><i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-4">Built an intelligent, context-aware support workflow utilizing Retrieval-Augmented Generation (RAG) and automation logic to handle user queries dynamically.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="text-xs text-neonBlue bg-neonBlue/10 px-2 py-1 rounded">OpenAI</span>
+                            <span class="text-xs text-neonBlue bg-neonBlue/10 px-2 py-1 rounded">LangChain</span>
+                            <span class="text-xs text-neonBlue bg-neonBlue/10 px-2 py-1 rounded">n8n</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="group relative rounded-2xl overflow-hidden bg-cardBg border border-gray-800 hover:border-neonPurple transition-all duration-500 reveal hover:-translate-y-2 hover:shadow-[0_10px_30px_rgba(180,0,251,0.15)] delay-100">
+                    <div class="h-48 bg-gray-900 relative overflow-hidden">
+                        <img src="https://placehold.co/600x400/090a0f/b400fb?text=Lead+Gen+Platform" alt="Project 2" class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-500 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-cardBg to-transparent"></div>
+                    </div>
+                    <div class="p-6 relative z-10">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-xl font-bold text-white group-hover:text-neonPurple transition-colors">AI Lead Generation Platform</h3>
+                            <a href="#" class="text-gray-400 hover:text-white"><i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-4">Created an end-to-end lead capture and processing workflow featuring webhook-based integrations for real-time CRM updates and qualification.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="text-xs text-neonPurple bg-neonPurple/10 px-2 py-1 rounded">Webhooks</span>
+                            <span class="text-xs text-neonPurple bg-neonPurple/10 px-2 py-1 rounded">Make</span>
+                            <span class="text-xs text-neonPurple bg-neonPurple/10 px-2 py-1 rounded">CRM API</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="group relative rounded-2xl overflow-hidden bg-cardBg border border-gray-800 hover:border-neonBlue transition-all duration-500 reveal hover:-translate-y-2 hover:shadow-[0_10px_30px_rgba(0,229,255,0.15)]">
+                    <div class="h-48 bg-gray-900 relative overflow-hidden">
+                        <img src="https://placehold.co/600x400/090a0f/00e5ff?text=Multi-Agent+System" alt="Project 3" class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-500 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-cardBg to-transparent"></div>
+                    </div>
+                    <div class="p-6 relative z-10">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-xl font-bold text-white group-hover:text-neonBlue transition-colors">Multi-Agent Market Research</h3>
+                            <a href="#" class="text-gray-400 hover:text-white"><i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-4">Designed an autonomous workflow leveraging multiple AI agents for structured data gathering, market analysis, and automated report generation.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="text-xs text-neonBlue bg-neonBlue/10 px-2 py-1 rounded">Claude</span>
+                            <span class="text-xs text-neonBlue bg-neonBlue/10 px-2 py-1 rounded">Zapier</span>
+                            <span class="text-xs text-neonBlue bg-neonBlue/10 px-2 py-1 rounded">Python</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="group relative rounded-2xl overflow-hidden bg-cardBg border border-gray-800 hover:border-neonPurple transition-all duration-500 reveal hover:-translate-y-2 hover:shadow-[0_10px_30px_rgba(180,0,251,0.15)] delay-100">
+                    <div class="h-48 bg-gray-900 relative overflow-hidden">
+                        <img src="https://placehold.co/600x400/090a0f/b400fb?text=Voice+AI+Assistant" alt="Project 4" class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-500 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-cardBg to-transparent"></div>
+                    </div>
+                    <div class="p-6 relative z-10">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-xl font-bold text-white group-hover:text-neonPurple transition-colors">Voice AI Assistant</h3>
+                            <a href="#" class="text-gray-400 hover:text-white"><i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-4">Developed a conversational AI assistant designed for real-time interaction workflows, integrating Speech-to-Text and Text-to-Speech APIs.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="text-xs text-neonPurple bg-neonPurple/10 px-2 py-1 rounded">Whisper AI</span>
+                            <span class="text-xs text-neonPurple bg-neonPurple/10 px-2 py-1 rounded">ElevenLabs</span>
+                            <span class="text-xs text-neonPurple bg-neonPurple/10 px-2 py-1 rounded">Node.js</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 bg-cardBg/50 relative border-t border-gray-800/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+                    <span class="text-neonBlue">05.</span> Get In Touch
+                </h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-transparent via-neonBlue to-transparent mx-auto mb-6"></div>
+                <p class="text-gray-400 max-w-2xl mx-auto">Currently open for new opportunities and freelance projects. Whether you have a question or just want to say hi, I'll try my best to get back to you!</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
+                <!-- Contact Info -->
+                <div class="reveal space-y-8">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-lg bg-gray-800 flex items-center justify-center text-neonBlue text-xl shrink-0">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-white font-bold mb-1">Email</h4>
+                            <a href="mailto:ashikhossen7030@gmail.com" class="text-gray-400 hover:text-neonBlue transition-colors">ashikhossen7030@gmail.com</a>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-lg bg-gray-800 flex items-center justify-center text-neonBlue text-xl shrink-0">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-white font-bold mb-1">Phone</h4>
+                            <a href="tel:+8801613927030" class="text-gray-400 hover:text-neonBlue transition-colors">+880 1613927030</a>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-lg bg-gray-800 flex items-center justify-center text-neonBlue text-xl shrink-0">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-white font-bold mb-1">Location</h4>
+                            <p class="text-gray-400">Ishurdi, Pabna, Bangladesh</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Static Form -->
+                <div class="reveal delay-200">
+                    <form class="space-y-4" onsubmit="event.preventDefault();">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-gray-400 mb-1">Name</label>
+                                <input type="text" id="name" class="w-full bg-darkBg border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-neonBlue focus:ring-1 focus:ring-neonBlue transition-all" placeholder="John Doe">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-400 mb-1">Email</label>
+                                <input type="email" id="email" class="w-full bg-darkBg border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-neonBlue focus:ring-1 focus:ring-neonBlue transition-all" placeholder="john@example.com">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="subject" class="block text-sm font-medium text-gray-400 mb-1">Subject</label>
+                            <input type="text" id="subject" class="w-full bg-darkBg border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-neonBlue focus:ring-1 focus:ring-neonBlue transition-all" placeholder="Project Inquiry">
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-400 mb-1">Message</label>
+                            <textarea id="message" rows="4" class="w-full bg-darkBg border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-neonBlue focus:ring-1 focus:ring-neonBlue transition-all resize-none" placeholder="How can I help you automate?"></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-3 px-4 bg-transparent border border-neonBlue text-neonBlue font-bold rounded-lg hover:bg-neonBlue hover:text-darkBg transition-all shadow-[0_0_10px_rgba(0,229,255,0.2)] hover:shadow-[0_0_20px_rgba(0,229,255,0.5)]">
+                            Send Message <i class="fas fa-paper-plane ml-2"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 bg-darkBg border-t border-gray-900 text-center">
+        <p class="text-gray-500 text-sm">
+            &copy; <script>document.write(new Date().getFullYear())</script> MD. ASHIK. Built with <span class="text-neonBlue">Code</span> & <span class="text-neonPurple">AI</span>.
+        </p>
+    </footer>
+
+    <!-- Interactive Scripts -->
+    <script>
+        // Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu on link click
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
+
+        // Navbar blur effect on scroll
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                navbar.classList.add('shadow-lg', 'shadow-neonBlue/5');
+                navbar.classList.replace('bg-darkBg/80', 'bg-darkBg/95');
+            } else {
+                navbar.classList.remove('shadow-lg', 'shadow-neonBlue/5');
+                navbar.classList.replace('bg-darkBg/95', 'bg-darkBg/80');
+            }
+        });
+
+        // Scroll Reveal Animation (Intersection Observer)
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealCallback = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    // Optional: Stop observing once revealed
+                    // observer.unobserve(entry.target); 
+                }
+            });
+        };
+
+        const revealOptions = {
+            threshold: 0.15,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const revealObserver = new IntersectionObserver(revealCallback, revealOptions);
+
+        revealElements.forEach(el => {
+            revealObserver.observe(el);
+        });
+    </script>
+</body>
+</html>
